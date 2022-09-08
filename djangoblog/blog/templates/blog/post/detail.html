@@ -13,6 +13,12 @@
         </a>
     </p>
 
+    {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}
+
     {% for comment in comments %}
         <div class="comment">
             <p class="info">
@@ -22,12 +28,27 @@
             {{ comment.body|linebreaks }}
         </div>
     {% empty %}
-        <p>There are no comments yet.</p>
+        <div>
+            <p>There are no comments yet.</p>
+        </div>
     {% endfor %}
 
-    {% with comments.count as total_comments %}
-        <h2>
-            {{ total_comments }} comment{{ total_comments|pluralize }}
-        </h2>
-    {% endwith %}
+    <div>
+        {% if new_comment %}
+            <h2>Your comment has been added.</h2>
+        {% else %}
+            <h2>Add a new comment</h2>
+            <form method="post">
+                {% comment %}{{ comment_form.as_p }}{% endcomment %}
+                {% for field in comment_form %}
+                    <div>
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endfor %}
+                {% csrf_token %}
+                <p><input type="submit" value="Add comment"></p>
+            </form>
+        {% endif %}
+    </div>
 {% endblock %}
