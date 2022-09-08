@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "blog.apps.BlogConfig",
     "taggit",
-    "django.contrib.sites",
+    # "django.contrib.sites", # comment this to fix django sitemap DoesNotExist at /sitemap.xml
     "django.contrib.sitemaps",
 ]
 
