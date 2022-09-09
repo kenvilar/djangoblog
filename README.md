@@ -1,2 +1,2 @@
 # djangoblog
-Simple Django Blog Site that will merge later to an advance django
+Django Blog Site. Will merge later to an advance django
